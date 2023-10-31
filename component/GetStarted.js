@@ -2,13 +2,13 @@ import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-n
 import React from 'react'
 
 
-const GetStarted = () => {
+const GetStarted = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image style={styles.imgLogomini} source={require('../assets/logomini.png')}>
                 </Image>
-                <TouchableOpacity style={styles.btnLogin} onPress={() => {/* Xử lý sự kiện đăng nhập */ }}>
+                <TouchableOpacity style={styles.btnLogin} onPress={() => navigation.navigate('Login')}>
                     <Text style={{ color: '#0055F9', fontSize: 18, fontWeight: '600' }}>Đăng nhập</Text>
                 </TouchableOpacity>
             </View>
