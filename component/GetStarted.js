@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     startButton: {
-        width:342,
+        width:'100%',
         height:60,
         backgroundColor: '#0055F9', 
         padding: 18, 

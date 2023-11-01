@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
             <View style={styles.header}>
-            <TouchableOpacity style={styles.createButton}>
+            <TouchableOpacity style={styles.createButton} onPress={() => navigation.navigate('Onboarding_Step1')}>
                     <Text style={styles.createButtonText}>Tạo tài khoản</Text>
                 </TouchableOpacity>
             </View>
