@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Button, Image } from 'react-native';
 
-export default function Onboarding_Step1({ navigation }) {
-    const [personalChecked, setPersonalChecked] = useState(false);
-    const [linkedChecked, setLinkedChecked] = useState(false);
+export default function Onboarding_Step3({ navigation }) {
+    const [aChecked, setAChecked] = useState(false);
+    const [bChecked, setBChecked] = useState(false);
+    const [cChecked, setCChecked] = useState(false);
 
-    const handlePersonalCheckbox = () => {
-        setPersonalChecked(!personalChecked);
-        setLinkedChecked(false);
+
+    const handleACheckbox = () => {
+        setAChecked(!aChecked);
+        setBChecked(false);
+        setCChecked(false);
+
     };
+    const handleBCheckbox = () => {
+        setBChecked(!bChecked);
+        setAChecked(false);
+        setCChecked(false);
 
-    const handleLinkedCheckbox = () => {
-        setLinkedChecked(!linkedChecked);
-        setPersonalChecked(false);
+    };
+    const handleCCheckbox = () => {
+        setCChecked(!cChecked);
+        setBChecked(false);
+        setAChecked(false);
+
     };
 
     const handleContinue = () => {
-        navigation.navigate('Onboarding_Step2');
+        navigation.navigate('Onboarding_Step4');
     };
 
     const handleGoBack = () => {
-        navigation.navigate('Login'); // Quay lại màn hình đăng nhập
+        navigation.goBack();//Quay lại màn hình trước đó
     };
 
     return (
@@ -37,8 +48,8 @@ export default function Onboarding_Step1({ navigation }) {
                 </TouchableOpacity>
                 <View style={styles.containerRectangle}>
                     <View style={[styles.rectangle, styles.greenRectangle]} />
-                    <View style={styles.rectangle} />
-                    <View style={styles.rectangle} />
+                    <View style={[styles.rectangle, styles.greenRectangle]} />
+                    <View style={[styles.rectangle, styles.greenRectangle]} />
                     <View style={styles.rectangle} />
                     <View style={styles.rectangle} />
                 </View>
@@ -46,53 +57,77 @@ export default function Onboarding_Step1({ navigation }) {
             <View style={styles.container2}>
                 <View>
                     <Text style={styles.txtTitle}>
-                        Lựa chọn tài khoản ngân hàng
+                        Loại tài khoản
                     </Text>
                     <Text style={styles.txtContent}>
-                        Hãy cho chúng tôi biết bạn đang tìm kiếm điều gì ở tài khoản ngân hàng.
+                        Chọn loại tài khoản bạn cần
                     </Text>
                 </View>
                 <View>
                     <Text style={styles.txtselect}>
-                        Bạn đang tìm kiếm một
+                        Bạn cần một tài khoản cho
                     </Text>
                     <View style={styles.optionContainer}>
-                        <Text style={styles.label}>Tài khoản cá nhân</Text>
+                        <View>
+                            <Text style={styles.label}>Tiết kiệm</Text>
+                            <Text style={styles.subLabel}>Thu lãi trên số dư tài khoản của tôi</Text>
+                        </View>
                         <TouchableOpacity
                             style={[
                                 styles.checkbox,
-                                personalChecked && styles.checkedCheckbox,
+                                aChecked && styles.checkedCheckbox,
                             ]}
-                            onPress={handlePersonalCheckbox}
+                            onPress={handleACheckbox}
                         >
-                            {personalChecked ? (
+                            {aChecked ? (
                                 <Text style={styles.checkedText}>✓</Text>
                             ) : null}
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.optionContainer}>
-                        <Text style={styles.label}>Tài khoản liên kết</Text>
+                        <View>
+                            <Text style={styles.label}>Các giao dịch thường xuyên</Text>
+                            <Text style={styles.subLabel}>Gửi tiền vào sử dụng hàng ngày bằng thẻ ghi nợ</Text>
+                        </View>
                         <TouchableOpacity
                             style={[
                                 styles.checkbox,
-                                linkedChecked && styles.checkedCheckbox,
+                                bChecked && styles.checkedCheckbox,
                             ]}
-                            onPress={handleLinkedCheckbox}
+                            onPress={handleBCheckbox}
                         >
-                            {linkedChecked ? (
+                            {bChecked ? (
+                                <Text style={styles.checkedText}>✓</Text>
+                            ) : null}
+
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.optionContainer}>
+                        <View>
+                            <Text style={styles.label}>Các giao dịch hàng ngày và tiết kiệm</Text>
+                            <Text style={styles.subLabel}>Sử dụng hàng ngày với quyền truy cập thẻ ghi nợ để kiếm lãi từ tiền tiết kiệm</Text>
+                        </View>
+                        <TouchableOpacity
+                            style={[
+                                styles.checkbox,
+                                cChecked && styles.checkedCheckbox,
+                            ]}
+                            onPress={handleCCheckbox}
+                        >
+                            {cChecked ? (
                                 <Text style={styles.checkedText}>✓</Text>
                             ) : null}
                         </TouchableOpacity>
                     </View>
-                </View>
 
+                </View>
             </View>
             <View style={styles.container3}>
                 <TouchableOpacity style={styles.startButton} onPress={handleContinue}>
                     <Text style={styles.startButtonText}>Continue</Text>
                 </TouchableOpacity>
-
             </View>
         </View>
     );
@@ -109,18 +144,17 @@ const styles = StyleSheet.create({
     },
     container2: {
         flex: 4,
-        marginTop:30
+        marginTop: 30
     },
     container3: {
         flex: 1,
     },
-
     optionContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 2,
         padding: 12,
-        height: 48,
+        height:'auto',
         width: '100%',
         justifyContent: 'space-between',
         marginTop: 12,
@@ -146,7 +180,10 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 14,
         marginRight: 10,
-        fontWeight:'700',
+        fontWeight: '700',
+    },
+    subLabel:{
+        width:270
     },
     arrowImage: {
         width: 24,
@@ -156,7 +193,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     containerRectangle: {
-        marginLeft:20,
+        marginLeft: 20,
         flex: 33,
         width: '100%',
         flexDirection: 'row',
@@ -176,24 +213,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#0055F9',
         padding: 18,
         borderRadius: 50,
-        marginTop:50
+        marginTop: 50
     },
     startButtonText: {
         color: 'white',
         fontSize: 18,
         textAlign: 'center',
     },
-    txtTitle:{
-        fontSize:18,
-        fontWeight:'700'
+    txtTitle: {
+        fontSize: 18,
+        fontWeight: '700'
     },
-    txtContent:{
-        fontSize:14,
-        marginTop:10
+    txtContent: {
+        fontSize: 14,
+        marginTop: 10
     },
-    txtselect:{
-         fontSize:14,
-         fontWeight:'700',
-         marginTop:30
+    txtselect: {
+        fontSize: 14,
+        fontWeight: '700',
+        marginTop: 30
     }
 });
