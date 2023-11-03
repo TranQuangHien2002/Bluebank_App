@@ -22,7 +22,7 @@ const GetStarted = ({ navigation }) => {
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.startButton}>
-                    <Text style={styles.startButtonText}>Bắt đầu</Text>
+                    <Text style={styles.startButtonText} onPress={() => navigation.navigate('Login')}>Bắt đầu</Text>
                 </TouchableOpacity>
             </View>
         </View>
