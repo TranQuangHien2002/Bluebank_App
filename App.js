@@ -17,7 +17,7 @@ import Onboarding_Step3 from './component/Onboarding_Step3'
 import Onboarding_Step4 from './component/Onboarding_Step4'
 import Onboarding_Step5 from './component/Onboarding_Step5'
 import PersonalDetails from './component/PersonalDetails'
-import MainScreen from '../Bluebank_App-master/component/MainScreen';
+import MainScreen from './component/MainScreen';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
