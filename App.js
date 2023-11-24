@@ -1,8 +1,7 @@
-// // import AppLaunch from './component/AppLaunch'
-// // export default AppLaunch
+// import AppLaunch from './component/PersonalDetails'
+// export default AppLaunch
 
-// import Onboarding_Step4 from './component/Onboarding_Step5'
-// export default Onboarding_Step4
+
 
 
 import * as React from 'react';
