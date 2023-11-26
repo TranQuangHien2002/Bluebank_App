@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={{ flex: 1, justifyContent: 'flex-start', padding: 20, backgroundColor: 'white', flexDirection: 'column' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
                     <Image style={{ width: 138, height: 35, left: 10 }} source={require('../assets/logomini.png')} />
-                    <TouchableOpacity style={{ marginTop: 10, backgroundColor: 'transparent', alignItems: 'center' }} >
+                    <TouchableOpacity style={{ marginTop: 10, backgroundColor: 'transparent', alignItems: 'center' }} onPress={() => navigation.navigate('GetStarted')}>
                         <Text style={{ color: '#0055F9', fontSize: 18, fontWeight: '600' }}>Đăng Xuất</Text>
                     </TouchableOpacity>
                 </View>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        padding: 20,
+        padding: 0,
         backgroundColor: 'white',
         flexDirection: 'column',
     },

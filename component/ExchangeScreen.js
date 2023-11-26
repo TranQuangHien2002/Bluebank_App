@@ -1,14 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Button, StyleSheet, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
 
 const ExchangeScreen = ({ navigation }) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
+  const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
+
+  const fetchData = async (apiUrl) => {
+    try {
+      setLoading(true);
+      const response = await axios.get(apiUrl);
+      const data = response.data[0];
+      setUserData(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+      setError('Error fetching data');
+      setLoading(false);
+    }
+  };
+
+  const formatMoney = (amount) => amount.toLocaleString('en-US');
+
+  // Fetch data when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      fetchData(apiUrl);
+    }, [apiUrl])
+  );
+  const renderCard = (title, money) => (
+    <View style={styles.card}>
+      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={styles.balance}>số dư:  {formatMoney(money)} VND</Text>
+      <Text style={styles.details}>BSB 123-234</Text>
+      <Text style={styles.details}>Số tài khoản {userData.soTK}</Text>
+    </View>
+  );
 
   useEffect(() => {
     // Display the modal when the screen is created
@@ -40,7 +77,7 @@ const ExchangeScreen = ({ navigation }) => {
       <View style={{ flex: 1, justifyContent: 'flex-start', padding: 20, backgroundColor: 'white', flexDirection: 'column' }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
           <Image style={{ width: 138, height: 35, left: 10 }} source={require('../assets/logomini.png')} />
-          <TouchableOpacity style={{ marginTop: 10, backgroundColor: 'transparent', alignItems: 'center' }} >
+          <TouchableOpacity style={{ marginTop: 10, backgroundColor: 'transparent', alignItems: 'center' }} onPress={() => navigation.navigate('GetStarted')}>
             <Text style={{ color: '#0055F9', fontSize: 18, fontWeight: '600' }}>Đăng Xuất</Text>
           </TouchableOpacity>
         </View>
@@ -57,32 +94,36 @@ const ExchangeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ height: 100, borderWidth: 1, borderColor: '#e1e1e1', borderRadius: 4, marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-          <Image style={{ width: 52, height: 30, margin: 15, borderRadius: 3 }} source={require('../assets/Group51.png')} />
-          <View style={{ flexDirection: 'column', width: 200 }}>
-            <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Choice</Text>
-            <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND 21.521.000</Text>
-            <View style={{ flexDirection: 'row', margin: 3 }}>
-              <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND </Text> <Text style={{ color: '#646464' }}>21.521.000</Text>
+        {userData && (
+          <View style={{ height: 100, borderWidth: 1, borderColor: '#e1e1e1', borderRadius: 4, marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+            <Image style={{ width: 52, height: 30, margin: 15, borderRadius: 3 }} source={require('../assets/Group51.png')} />
+            <View style={{ flexDirection: 'column', width: 200 }}>
+              <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Choice</Text>
+              <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND {formatMoney(userData.moneyChoice)}</Text>
+              <View style={{ flexDirection: 'row', margin: 3 }}>
+                <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyChoice)} </Text>
+              </View>
             </View>
+            <TouchableOpacity style={{}}>
+              <Icon name='arrow-forward' size={28} color={'blue'} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={{}}>
-            <Icon name='arrow-forward' size={28} color={'blue'} />
-          </TouchableOpacity>
-        </View>
-        <View style={{ height: 100, borderWidth: 1, borderColor: '#e1e1e1', borderRadius: 4, marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-          <Image style={{ width: 30, height: 30, margin: 26, borderRadius: 3 }} source={require('../assets/bank.png')} />
-          <View style={{ flexDirection: 'column', width: 200 }}>
-            <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Life</Text>
-            <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND 102.771.200</Text>
-            <View style={{ flexDirection: 'row', margin: 3 }}>
-              <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND </Text> <Text style={{ color: '#646464', fontWeight: '650' }}>102.771.200</Text>
+        )}
+        {userData && (
+          <View style={{ height: 100, borderWidth: 1, borderColor: '#e1e1e1', borderRadius: 4, marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
+            <Image style={{ width: 30, height: 30, margin: 26, borderRadius: 3 }} source={require('../assets/bank.png')} />
+            <View style={{ flexDirection: 'column', width: 200 }}>
+              <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Life</Text>
+              <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND {formatMoney(userData.moneyLife)}</Text>
+              <View style={{ flexDirection: 'row', margin: 3 }}>
+                <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyChoice)}</Text>
+              </View>
             </View>
+            <TouchableOpacity style={{}}>
+              <Icon name='arrow-forward' size={28} color={'blue'} />
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={{}}>
-            <Icon name='arrow-forward' size={28} color={'blue'} />
-          </TouchableOpacity>
-        </View>
+        )}
         <View style={{ height: 45, borderWidth: 1, borderColor: '#e1e1e1', borderRadius: 4, marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 25 }}>
           <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ color: '#646464', fontWeight: '650' }}>Xem tổng số tiền trong tài khoản</Text>

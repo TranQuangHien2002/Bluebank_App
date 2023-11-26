@@ -5,7 +5,7 @@ export default function Onboarding_Step5({ navigation }) {
 
 
   const handleContinue = () => {
-    navigation.navigate('PersonalDetails');
+    navigation.navigate('AccountSuccess');
   };
 
   const handleGoBack = () => {
