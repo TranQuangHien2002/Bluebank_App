@@ -16,7 +16,7 @@ const InputScreen = ({ navigation }) => {
   const [ten, setTen] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('Vietnam'); // Giả sử mặc định là Việt Nam
+  const [selectedCountry, setSelectedCountry] = useState('United States'); // Giả sử mặc định là Việt Nam
 
   const handleSave = () => {
     // Xử lý lưu dữ liệu đầu vào, ví dụ: gửi đến API
@@ -29,7 +29,7 @@ const InputScreen = ({ navigation }) => {
   };
 
   const handleContinue = () => {
-    navigation.navigate('PersonalDetails');
+    navigation.navigate('AccountSuccess');
   };
 
   const handleGoBack = () => {
