@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
     const handleLogin = () => {
         const matchedAccount = accounts.find(account => account.username === username && account.password === password);
         if (matchedAccount) {
-            navigation.navigate('MainScreen');
+            navigation.navigate('MainScreenComponent');
         } else {
             alert('Đăng nhập không thành công');
         }

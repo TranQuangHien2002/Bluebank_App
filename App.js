@@ -1,30 +1,26 @@
-// import AppLaunch from './component/PersonalDetails'
-// export default AppLaunch
-
-
-
-
+// App.js
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './component/Login'
-import Dashboard from './component/Dashboard'
-import GetStarted from './component/GetStarted'
-import Onboarding_Step1 from './component/Onboarding_Step1'
-import Onboarding_Step2 from './component/Onboarding_Step2'
-import Onboarding_Step3 from './component/Onboarding_Step3'
-import Onboarding_Step4 from './component/Onboarding_Step4'
-import Onboarding_Step5 from './component/Onboarding_Step5'
-import PersonalDetails from './component/PersonalDetails'
-import MainScreen from './component/MainScreen';
+import Login from './component/Login';
+import Dashboard from './component/Dashboard';
+import GetStarted from './component/GetStarted';
+import Onboarding_Step1 from './component/Onboarding_Step1';
+import Onboarding_Step2 from './component/Onboarding_Step2';
+import Onboarding_Step3 from './component/Onboarding_Step3';
+import Onboarding_Step4 from './component/Onboarding_Step4';
+import Onboarding_Step5 from './component/Onboarding_Step5';
+import PersonalDetails from './component/PersonalDetails';
+import MainScreenComponent from './component/MainScreenComponent'; // Removed '.js'
 const Stack = createNativeStackNavigator();
+
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='GetStarted' screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="GetStarted" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen name="MainScreenComponent" component={MainScreenComponent} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="Onboarding_Step1" component={Onboarding_Step1} />
         <Stack.Screen name="Onboarding_Step2" component={Onboarding_Step2} />
@@ -36,4 +32,4 @@ function App() {
     </NavigationContainer>
   );
 }
-export default App
+export default App;
