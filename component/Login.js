@@ -9,8 +9,8 @@ const LoginScreen = ({ navigation }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const accounts = [
-        { username: 'user1', password: 'password1' },
-        { username: 'user2', password: 'password2' },
+        { username: 'QuangHien', password: '123' },
+        { username: '1', password: '1' },
     ];
 
     const handleLogin = () => {
