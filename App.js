@@ -43,5 +43,5 @@ function App() {
 }
 export default App;
 
-// import HomeScreen  from "./component/Pay4";
-// export default HomeScreen
+// import HomeScreen  from "./component/ExchangeScreen";
+// export default HomeScreen;
