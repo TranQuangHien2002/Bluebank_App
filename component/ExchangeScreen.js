@@ -145,7 +145,7 @@ const ExchangeScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.modalButton}
                 onPress={() => {
-                  navigation.navigate('Pay2')
+                  navigation.navigate('Pay1')
                   toggleModal();
                 }}
               >
@@ -157,7 +157,7 @@ const ExchangeScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.modalButton}
                 onPress={() => {
-                  navigation.navigate('Pay3')
+                  navigation.navigate('Pay1')
                   toggleModal();
                 }}
               >
@@ -169,7 +169,7 @@ const ExchangeScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.modalButton}
                 onPress={() => {
-                  navigation.navigate('Pay4')
+                  navigation.navigate('Pay1')
                   toggleModal();
                 }}
               >

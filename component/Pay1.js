@@ -34,6 +34,9 @@ const Pay1Screen = ({ navigation }) => {
     const handleGoBack = () => {
         navigation.goBack();//Quay lại màn hình trước đó
     };
+    const handleContinue = () => {
+        navigation.navigate('Pay2')
+    };
     return (
         <View style={styles.container}>
             <View style={styles.container1}>
@@ -51,16 +54,23 @@ const Pay1Screen = ({ navigation }) => {
                 </View>
             </View>
 
-            <Text style={{ fontSize: 18, fontWeight: 700, marginTop: 30}}>Từ</Text>
-            {userData && (
-                <View style={{ ...styles.card, backgroundColor: '#E2F3FF', borderWidth: 2, borderColor: "#0055F9" }}>
-                    <Text style={styles.cardTitle}>Bluebank Choice</Text>
-                    <Text style={styles.balance}>VND {formatMoney(userData.moneyChoice)}</Text>
-                    <Text style={styles.details}>BSB 123-234      số dư</Text>
-                    <Text style={styles.details}>Số tài khoản {userData.soTK}</Text>
-                </View>
-            )}
-            {userData && renderCard('Bluebank Life', userData.moneyLife)}
+            <View style={styles.container2}>
+                <Text style={{ fontSize: 18, fontWeight: 700, marginTop: 30 }}>Từ</Text>
+                {userData && (
+                    <View style={{ ...styles.card, backgroundColor: '#E2F3FF', borderWidth: 2, borderColor: "#0055F9" }}>
+                        <Text style={styles.cardTitle}>Bluebank Choice</Text>
+                        <Text style={styles.balance}>VND {formatMoney(userData.moneyChoice)}</Text>
+                        <Text style={styles.details}>BSB 123-234      số dư</Text>
+                        <Text style={styles.details}>Số tài khoản {userData.soTK}</Text>
+                    </View>
+                )}
+                {userData && renderCard('Bluebank Life', userData.moneyLife)}
+            </View>
+            <View style={styles.container3}>
+                <TouchableOpacity style={styles.startButton} onPress={handleContinue}>
+                    <Text style={styles.startButtonText}>Tiếp theo</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -113,6 +123,25 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
     },
+    container3: {
+        flex: 1,
+    },
+    startButton: {
+        width: '100%',
+        height: 60,
+        backgroundColor: '#0055F9',
+        padding: 18,
+        borderRadius: 50,
+        marginTop: 50
+    },
+    startButtonText: {
+        color: 'white',
+        fontSize: 18,
+        textAlign: 'center',
+    },
+    container2:{
+        flex: 4,
+    }
 });
 
 export default Pay1Screen;
