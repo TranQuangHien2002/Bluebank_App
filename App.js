@@ -1,4 +1,4 @@
-// App.js
+// // App.js
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,5 +43,5 @@ function App() {
 }
 export default App;
 
-// import HomeScreen  from "./component/ExchangeScreen.js";
+// import HomeScreen  from "./component/Pay1";
 // export default HomeScreen
