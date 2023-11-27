@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Button, StyleSheet, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const ExchangeScreen = ({ navigation }) => {
@@ -14,30 +15,21 @@ const ExchangeScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-  const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
 
-  const fetchData = async (apiUrl) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(apiUrl);
-      const data = response.data[0];
-      setUserData(data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-      setError('Error fetching data');
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const getUserData = async () => {
+      // Lấy thông tin người dùng đã đăng nhập từ AsyncStorage
+      const userData1 = await AsyncStorage.getItem('user');
+      setUserData(JSON.parse(userData1));
+    };
+
+    getUserData();
+  }, []);
 
   const formatMoney = (amount) => amount.toLocaleString('en-US');
 
   // Fetch data when the screen is focused
-  useFocusEffect(
-    useCallback(() => {
-      fetchData(apiUrl);
-    }, [apiUrl])
-  );
+  
   const renderCard = (title, money) => (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{title}</Text>

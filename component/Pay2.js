@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Pay2Screen = ({ navigation }) => {
-  const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    fetchData(apiUrl);
-  }, []);
+    const getUserData = async () => {
+      // Lấy thông tin người dùng đã đăng nhập từ AsyncStorage
+      const userData1 = await AsyncStorage.getItem('user');
+      setUserData(JSON.parse(userData1));
+    };
 
+    getUserData();
+  }, []);
   const formatMoney = (amount) => amount.toLocaleString('en-US');
 
-  const fetchData = async (apiUrl) => {
-    try {
-      const response = await axios.get(apiUrl);
-      const data = response.data[0];
-      setUserData(data);
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
-  };
+
 
   const handleGoBack = () => {
     navigation.goBack(); //Quay lại màn hình trước đó

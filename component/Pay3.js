@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TransferScreen = ({navigation}) => {
     const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
@@ -8,18 +9,14 @@ const TransferScreen = ({navigation}) => {
     const [transferAmount, setTransferAmount] = useState('');
 
     useEffect(() => {
-        fetchData(apiUrl);
-    }, []);
-
-    const fetchData = async (apiUrl) => {
-        try {
-            const response = await axios.get(apiUrl);
-            const data = response.data[0];
-            setUserData(data);
-        } catch (error) {
-            console.error('Error fetching data: ', error);
-        }
-    };
+        const getUserData = async () => {
+          // Lấy thông tin người dùng đã đăng nhập từ AsyncStorage
+          const userData1 = await AsyncStorage.getItem('user');
+          setUserData(JSON.parse(userData1));
+        };
+    
+        getUserData();
+      }, []);
 
     const handleTransfer = async () => {
         try {

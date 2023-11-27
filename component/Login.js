@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const LoginScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const accounts = [
-        { username: 'QuangHien', password: '123' },
-        { username: '1', password: '1' },
-    ];
 
-    const handleLogin = () => {
-        const matchedAccount = accounts.find(account => account.username === username && account.password === password);
-        if (matchedAccount) {
+    const handleLogin = async () => {
+        try {
+          // Lấy dữ liệu từ API JSON
+          const response = await axios.get(
+            'https://65637199ee04015769a735e3.mockapi.io/BlueBank'
+          );
+          const userData = response.data;
+    
+          const user = userData.find(
+            (u) => u.userName === username && u.passWord === password
+          );
+    
+          if (user) {
+            // Lưu thông tin người dùng đã đăng nhập vào AsyncStorage
+            await AsyncStorage.setItem('user', JSON.stringify(user));
+            // Chuyển đến màn hình Profile
             navigation.navigate('MainScreenComponent');
-        } else {
+          } else {
             alert('Đăng nhập không thành công');
+          }
+        } catch (error) {
+          console.error('Lỗi khi lấy dữ liệu từ API:', error);
         }
-    };
+      };
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword(!showPassword);

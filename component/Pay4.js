@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Pay4Screen = ({ navigation }) => {
 
+  
+  
   const handleContinue = () => {
     navigation.navigate('MainScreenComponent')
   };

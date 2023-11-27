@@ -3,6 +3,7 @@ import { Text, View, Image, TouchableOpacity, TextInput, Button, StyleSheet, Mod
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect } from '@react-navigation/native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation }) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -14,30 +15,20 @@ const HomeScreen = ({ navigation }) => {
         setModalVisible(!isModalVisible);
     };
 
-    const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
+    useEffect(() => {
+        const getUserData = async () => {
+          // Lấy thông tin người dùng đã đăng nhập từ AsyncStorage
+          const userData1 = await AsyncStorage.getItem('user');
+          setUserData(JSON.parse(userData1));
+        };
+    
+        getUserData();
+      }, []);
 
-    const fetchData = async (apiUrl) => {
-        try {
-            setLoading(true);
-            const response = await axios.get(apiUrl);
-            const data = response.data[0];
-            setUserData(data);
-            setLoading(false);
-        } catch (error) {
-            console.error('Error fetching data: ', error);
-            setError('Error fetching data');
-            setLoading(false);
-        }
-    };
 
     const formatMoney = (amount) => amount.toLocaleString('en-US');
 
     // Fetch data when the screen is focused
-    useFocusEffect(
-        useCallback(() => {
-            fetchData(apiUrl);
-        }, [apiUrl])
-    );
 
     const renderCard = (title, money) => (
         <View style={styles.card}>
@@ -97,7 +88,7 @@ const HomeScreen = ({ navigation }) => {
                         <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Life</Text>
                         <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND {formatMoney(userData.moneyLife)}</Text>
                         <View style={{ flexDirection: 'row', margin: 3 }}>
-                            <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyChoice)}</Text>
+                            <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyLife)}</Text>
                         </View>
                     </View>
                     <TouchableOpacity style={{}}>
