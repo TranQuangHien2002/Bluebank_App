@@ -90,7 +90,7 @@ export default function Onboarding_Step1({ navigation }) {
             </View>
             <View style={styles.container3}>
                 <TouchableOpacity style={styles.startButton} onPress={handleContinue}>
-                    <Text style={styles.startButtonText}>Continue</Text>
+                    <Text style={styles.startButtonText}>Tiếp tục</Text>
                 </TouchableOpacity>
 
             </View>

@@ -47,7 +47,12 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.details}>Số tài khoản {userData.soTK}</Text>
         </View>
     );
-
+    
+    useEffect(() => {
+        // Display the modal when the screen is created
+        toggleModal();
+    }, []);
+    
     return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: 'flex-start', padding: 20, backgroundColor: 'white', flexDirection: 'column' }}>
