@@ -3,7 +3,6 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'reac
 import { Feather } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-
 const LoginScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -14,7 +13,7 @@ const LoginScreen = ({ navigation }) => {
         try {
           // Lấy dữ liệu từ API JSON
           const response = await axios.get(
-            'https://65637199ee04015769a735e3.mockapi.io/BlueBank'
+            'https://654cc15277200d6ba8595b20.mockapi.io/bluebank'
           );
           const userData = response.data;
     

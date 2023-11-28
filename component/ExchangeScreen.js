@@ -178,13 +178,13 @@ const ExchangeScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.modalButton}
                 onPress={() => {
-                  navigation.navigate('Pay1')
+                  navigation.navigate('Transfer')
                   toggleModal();
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10 }}>
                   <Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../assets/Frame.png')} />
-                  <Text style={{ fontSize: 16, fontWeight: '480', marginLeft: 22 }}>Thực hiện thanh toán cho ai đó</Text>
+                  <Text style={{ fontSize: 16, fontWeight: '480', marginLeft: 22 }}>Thực hiện chuyển khoản cho tài khoản khác</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity

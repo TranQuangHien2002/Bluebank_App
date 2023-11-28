@@ -4,7 +4,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TransferScreen = ({navigation}) => {
-    const apiUrl = 'https://65637199ee04015769a735e3.mockapi.io/BlueBank';
+    const apiUrl = 'https://654cc15277200d6ba8595b20.mockapi.io/bluebank';
     const [userData, setUserData] = useState(null);
     const [transferAmount, setTransferAmount] = useState('');
 
