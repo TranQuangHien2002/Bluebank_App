@@ -108,7 +108,7 @@ const ExchangeScreen = ({ navigation }) => {
               <Text style={{ fontWeight: '500', fontSize: 16, margin: 3 }}>Bluebank Life</Text>
               <Text style={{ margin: 3, fontWeight: '650', fontSize: 22 }}>VND {formatMoney(userData.moneyLife)}</Text>
               <View style={{ flexDirection: 'row', margin: 3 }}>
-                <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyChoice)}</Text>
+                <Text style={{ color: '#646464' }}>Số dư </Text> <Text style={{ fontWeight: '650', color: '#646464' }}>VND {formatMoney(userData.moneyLife)}</Text>
               </View>
             </View>
             <TouchableOpacity style={{}}>

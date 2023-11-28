@@ -18,6 +18,7 @@ import Pay4 from './component/Pay4';
 import AccountSuccess from './component/AccountSuccess';
 import Transfer from './component/Transfer';
 import MainScreenComponent from './component/MainScreenComponent'; // Removed '.js'
+import MainScreen from './component/MainScreen';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Stack.Screen name="Pay4" component={Pay4} />
         <Stack.Screen name="AccountSuccess" component={AccountSuccess} />
         <Stack.Screen name="Transfer" component={Transfer} />
+        <Stack.Screen name="MainScreen" component={MainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
