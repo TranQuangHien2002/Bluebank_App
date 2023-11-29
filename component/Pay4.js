@@ -6,7 +6,8 @@ const Pay4Screen = ({ navigation }) => {
   
   
   const handleContinue = () => {
-    navigation.navigate('MainScreenComponent')
+    // Use the navigation prop to navigate to 'HomeScreen'
+    navigation.navigate('Trang chủ');
   };
   return (
     <View style={styles.container}>

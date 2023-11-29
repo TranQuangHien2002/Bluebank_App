@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, Button, StyleSheet, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect } from '@react-navigation/native';
@@ -15,10 +15,8 @@ const ExchangeScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-
   useEffect(() => {
     const getUserData = async () => {
-      // Lấy thông tin người dùng đã đăng nhập từ AsyncStorage
       const userData1 = await AsyncStorage.getItem('user');
       setUserData(JSON.parse(userData1));
     };
@@ -26,10 +24,24 @@ const ExchangeScreen = ({ navigation }) => {
     getUserData();
   }, []);
 
+  useEffect(() => {
+    // Display the modal when the screen is created
+    toggleModal();
+  }, []);
+
+  useEffect(() => {
+    // Toggle the modal whenever the "Giao Dịch" tab is pressed
+    const unsubscribe = navigation.addListener('tabPress', (e) => {
+      toggleModal();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   const formatMoney = (amount) => amount.toLocaleString('en-US');
 
   // Fetch data when the screen is focused
-  
+
   const renderCard = (title, money) => (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>{title}</Text>
@@ -39,10 +51,10 @@ const ExchangeScreen = ({ navigation }) => {
     </View>
   );
 
-  useEffect(() => {
-    // Display the modal when the screen is created
-    toggleModal();
-  }, []);
+  // useEffect(() => {
+  //   // Display the modal when the screen is created
+  //   toggleModal();
+  // }, []);
 
   const formatNumber = (numberString) => {
     const firstPart = numberString.slice(0, 4);
